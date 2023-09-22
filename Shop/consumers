@@ -1,0 +1,24 @@
+from channels.generic.websocket import AsyncWebsocketConsumer
+import json
+from asgiref.sync import async_to_sync
+from channels.layers import get_channel_layer
+
+class StoreConsumer (asyncWebsocketConsumer):
+	async def connect (self):
+		await self.accept()
+		await self.channel_layer.group_add('store_updates', self.channel_name)
+
+	async def disconnect (self, close_code):
+		await self.channel_layer.group_discard('store_updates', self.channel_name)
+
+	async def receive (self, text_data):
+		pass
+
+	async def send_store_update(self, event):
+		store_data = event['store_data']
+		await self.send (json.dumps(store_data))
+
+
+def send_store_update(data):
+	channel_layer = get_channel_layer ()
+	async_to_sync(channel_layer.group_send)('store_updates', {'type': 'send_store_update', 'data': data})
