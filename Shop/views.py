@@ -5,9 +5,8 @@ import logging
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Organization
+from .models import Shop, Organization
 from .serializers import OrganizationSerializer
-from .models import Shop
 from .serializers import ShopSerializer
 from django.http import HttpResponse
 

@@ -12,7 +12,7 @@ import os
 from django.core.asgi import get_asgi_application
 from django.urls import re_path
 from channels.routing import ProtocolTypeRouter, URLRouter
-from Shop.routing import websocket_urlpatterns
+from shop.routing import websocket_urlpatterns
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'blog.settings')
 

@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM python:3.10-slim
 
 # Устанавливаем зависимости и необходимые пакеты
 RUN apt-get update && \

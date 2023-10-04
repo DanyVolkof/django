@@ -1,5 +1,5 @@
 from django.urls import re_path
-from Shop import consumers
+from shop import consumers
 
 websocket_urlpatterns = [
     re_path(r'ws/store_updates/$', consumers.StoreConsumer.as_asgi())
