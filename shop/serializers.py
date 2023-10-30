@@ -1,6 +1,8 @@
 from rest_framework import serializers
-from .models import Organization, Shop
+from shop.models import Organization, Shop
 
+
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 # Create your views here.
 class ShopSerializer(serializers.ModelSerializer):
@@ -15,3 +17,13 @@ class OrganizationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Organization
         fields = ['name', 'description', 'shops']
+
+
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        token['username'] = user.username
+        return token
+
+

@@ -1,0 +1,27 @@
+{% extends 'admin/base.html' %}
+{% load static %}
+{% block extrastyle %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+{% endblock %}
+
+{% block extrahead %}
+    <script src="{% static 'js/script.js' %}"></script>
+{% endblock %}
+
+{% block footer %}
+    {{ block.super }}
+    <script>
+        console.log("Проект в стадии разработки");
+    </script>
+{% endblock %}
+
+{% block content %}
+    {<a href="{ % url 'organizations-list' % }"></a>}
+    {<a href="{ % url 'get-shops-file' % }"></a>}
+    {<a href="{ % url 'shop-view' % }"></a>}
+    {<a href="{ % url 'token_obtain_pair' % }"></a>}
+    {<a href="{ % url 'token_refresh' % }"></a>}
+    {<a href="{ % url 'token_verify' % }"></a>}
+    {<a href="{ % url 'schema-swagger-ui' % }"></a>}
+{% endblock %}
+

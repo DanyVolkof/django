@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "django"
+name = "shops-online"
 version = "0.1.0"
 description = ""
 authors = ["DanyVolkof <dvolkov1999@yandex.ru>"]
@@ -7,8 +7,15 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-shop = "^0.0.2"
-blog = "^1.0.1"
+django = "^4.2.6"
+djangorestframework-simplejwt = "^5.3.0"
+timedelta = "^2020.12.3"
+datetime = "^5.2"
+django4-background-tasks = "^1.2.9"
+django-channels = "^0.7.0"
+pandas = "^1.5"
+drf-yasg = "^1.21.7"
+whitenoise = "^6.6.0"
 
 
 [build-system]
