@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from .models import Shop, Organization
-from shop.serializers import OrganizationSerializer, ShopSerializer
+from shop.serializers import OrganizationSerializer, ShopSerializer, MyTokenObtainPairSerializer
 from rest_framework.response import Response
 from rest_framework import status
 import pandas as pd
@@ -16,8 +16,11 @@ from background_task.models import Task
 from .tasks import send_email_task
 
 from rest_framework.decorators import api_view, permission_classes
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 
 @api_view(['GET'])
@@ -27,6 +30,7 @@ class OrganizationListView(APIView):
 		try:
 			organizations = Organization.objects.filter(is_deleted=False)
 			serializer = OrganizationSerializer(organizations, many=True)
+			authentication_classes = [JWTAuthentication]
 			# логирование
 			logging.info('GET запрос был выполнен успешно')
 			return Response(serializer.data, status=status.HTTP_200_OK)
@@ -87,3 +91,25 @@ class shops_file(APIView):
 		except Exception as e:
 			logging.error(f'Произошла ошибка при выполнении запроса: {e}')
 			return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+		
+
+
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
+
+'''
+
+from rest_framework_simplejwt.tokens import RefreshToken
+
+def get_tokens_for_user(user):
+    refresh = RefreshToken.for_user(user)
+
+    return {
+        'refresh': str(refresh),
+        'access': str(refresh.access_token),
+    }
+
+
+'''
+
