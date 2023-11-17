@@ -23,14 +23,13 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
+
 class OrganizationListView(APIView):
 	def get (self, request):
 		try:
 			organizations = Organization.objects.filter(is_deleted=False)
 			serializer = OrganizationSerializer(organizations, many=True)
-			authentication_classes = [JWTAuthentication]
+			self.authentication_classes = [JWTAuthentication()]
 			# логирование
 			logging.info('GET запрос был выполнен успешно')
 			return Response(serializer.data, status=status.HTTP_200_OK)
@@ -98,18 +97,5 @@ class shops_file(APIView):
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
-'''
 
-from rest_framework_simplejwt.tokens import RefreshToken
-
-def get_tokens_for_user(user):
-    refresh = RefreshToken.for_user(user)
-
-    return {
-        'refresh': str(refresh),
-        'access': str(refresh.access_token),
-    }
-
-
-'''
 
