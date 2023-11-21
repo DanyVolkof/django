@@ -23,7 +23,8 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 
-
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
 class OrganizationListView(APIView):
 	def get (self, request):
 		try:
@@ -36,7 +37,6 @@ class OrganizationListView(APIView):
 		except Exception as e:
 			logging.error(f'Произошла ошибка при выполнении запроса: {e}')
 			return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
 
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated])
@@ -69,7 +69,6 @@ class ShopView(APIView):
 		except Exception as e:
 			logging.error(f'Произошла ошибка при выполнении запроса: {e}')
 			return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])

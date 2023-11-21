@@ -30,7 +30,8 @@ yasg_view = get_schema_view(
 urlpatterns = [
     path('', views.shops_file),
     path('', views.ShopView),
-    path('api/organizations/', OrganizationListView.as_view(), name='organizations-list'),
+    path('', views.OrganizationListView),
+    path('api/organizations/', views.OrganizationListView, name='organizations-list'),
     path('api/organizations/<int:id>/shops_file/', views.shops_file, name='get-shops-file'),
     path('api/shops/<int:id>/', views.ShopView, name='shop-view'),
     path('api/v1/token/', views.MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
