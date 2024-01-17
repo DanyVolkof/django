@@ -6,12 +6,12 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 class ShopSerializer(serializers.ModelSerializer):
     class Meta:
         model = Shop
-        fields = ['name', 'description', 'address', 'index']
+        fields = ['name', 'description', 'address', 'index', 'is_deleted']
 
 
 
 class OrganizationSerializer(serializers.ModelSerializer):
-    shops = ShopSerializer(many=True, read_only=True)
+    shops = ShopSerializer(many=True, read_only=True, source='shop_set')
     class Meta:
         model = Organization
         fields = ['name', 'description', 'shops']

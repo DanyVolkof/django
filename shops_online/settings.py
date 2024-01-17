@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'shops_online',
     'channels',
     'background_task',
+    'pandas',
     'shop',
     'drf_yasg',
 ]
@@ -76,7 +77,9 @@ ROOT_URLCONF = 'shops_online.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [
+            BASE_DIR / 'SHOPS_ONLINE' / 'templates' / 'admin'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

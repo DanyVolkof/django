@@ -23,7 +23,7 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 from drf_yasg.utils import swagger_auto_schema
 
-
+	
 class OrganizationListView(APIView):
 	permission_classes = [IsAuthenticated]
 	authentication_classes = [JWTAuthentication]
@@ -31,7 +31,7 @@ class OrganizationListView(APIView):
 	@swagger_auto_schema(security=[{"Bearer": []}])
 	def get (self, request):
 		try:
-			organizations = Organization.objects.filter(is_deleted=False)
+			organizations = Organization.objects.all()
 			serializer = OrganizationSerializer(organizations, many=True)
 			# логирование
 			logging.info('GET запрос был выполнен успешно')
