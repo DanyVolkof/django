@@ -14,6 +14,7 @@ from pathlib import Path
 import datetime
 import os
 import whitenoise
+import logging
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -70,7 +71,12 @@ MIDDLEWARE = [
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = "static/"
+STATIC_ROOT = os.path.join (BASE_DIR, "staticfiles")
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
 ROOT_URLCONF = 'shops_online.urls'
 
@@ -190,6 +196,9 @@ SIMPLE_JWT = {
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+LOGGER_NAME = logging.getLogger('shop')
+LOG_LEVEL = logging.DEBUG
+LOGGER_NAME.setLevel(LOG_LEVEL)
 
 LOGGING = {
     'version': 1,
@@ -211,7 +220,6 @@ LOGGING = {
         },
     },
 }
-
 
 ASGI_APPLICATION = 'shops_online.asgi.application'
 
